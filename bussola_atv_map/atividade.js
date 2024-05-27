@@ -6,7 +6,7 @@ const coisasPraComer = [
         categoria: "Frutas"
     },
     {
-        nome: "Alface",
+        nome: "Cenoura",
         categoria: "Legumes"
     },
     {
@@ -14,21 +14,26 @@ const coisasPraComer = [
         categoria: "Frutas"
     },
     {
-        nome: "Rúcula",
+        nome: "Abóbora",
         categoria: "Legumes"
     },
     {
-        nome: "Fruta1",
+        nome: "Laranja",
         categoria: "Frutas"
     },
     {
-        nome: "Legume1",
+        nome: "Cogumelo",
         categoria: "Legumes"
     },
 ]
 
+const arrayFrutas = []
+const arrayLegumes = []
+
 coisasPraComer.forEach(e => {
-    produtos.set(e.categoria, e.nome)
+    e.categoria == "Frutas" ? arrayFrutas.push(e.nome) : arrayLegumes.push(e.nome)
 });
+produtos.set("Frutas", arrayFrutas)
+produtos.set("Legumes", arrayLegumes)
 
 console.log(produtos)
