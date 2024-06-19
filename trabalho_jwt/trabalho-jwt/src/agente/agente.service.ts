@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAgenteDto } from './dto/create-agente.dto';
 import { UpdateAgenteDto } from './dto/update-agente.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Agente } from './agente';
 
 @Injectable()
 export class AgenteService {
-  create(createAgenteDto: CreateAgenteDto) {
-    return 'This action adds a new agente';
+
+  constructor(@InjectModel('Agente') private readonly agenteModel: Model<Agente>){}
+
+  async create(createAgenteDto: CreateAgenteDto) {
+    const createdProduct = new this.agenteModel(createAgenteDto);
+    return await createdProduct.save();
   }
 
-  findAll() {
-    return `This action returns all agente`;
+  async findAll() {
+    return await this.agenteModel.find().exec();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} agente`;
+  async findOne(id: string) {
+    return await this.agenteModel.findById(id).exec();
   }
 
-  update(id: number, updateAgenteDto: UpdateAgenteDto) {
-    return `This action updates a #${id} agente`;
+  async update(id: string, updateAgenteDto: UpdateAgenteDto) {
+    await this.agenteModel.updateOne({_id: id}, updateAgenteDto).exec();
+    return this.findOne(id);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} agente`;
+  async remove(id: string) {
+    return await this.agenteModel.deleteOne({_id: id,}).exec()
   }
 }

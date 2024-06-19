@@ -1,1 +1,6 @@
-export class CreateAgenteDto {}
+export class CreateAgenteDto {
+    readonly name: string;
+    readonly description: string;
+    readonly icon: string;
+    readonly role: string;
+}

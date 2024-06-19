@@ -19,16 +19,16 @@ export class AgenteController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.agenteService.findOne(+id);
+    return this.agenteService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateAgenteDto: UpdateAgenteDto) {
-    return this.agenteService.update(+id, updateAgenteDto);
+    return this.agenteService.update(id, updateAgenteDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.agenteService.remove(+id);
+    return this.agenteService.remove(id);
   }
 }
