@@ -30,6 +30,7 @@ import { UpdateAgenteDto } from './dto/update-agente.dto';
 export declare class AgenteController {
     private readonly agenteService;
     constructor(agenteService: AgenteService);
+    createFromValorantApi(): Promise<void>;
     create(createAgenteDto: CreateAgenteDto): Promise<import("mongoose").Document<unknown, {}, import("./agente").Agente> & import("./agente").Agente & {
         _id: import("mongoose").Types.ObjectId;
     }>;

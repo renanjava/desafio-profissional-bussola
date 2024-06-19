@@ -7,6 +7,11 @@ import { UpdateAgenteDto } from './dto/update-agente.dto';
 export class AgenteController {
   constructor(private readonly agenteService: AgenteService) {}
 
+  @Post('/consumir-api')
+  createFromValorantApi(){
+    return this.agenteService.createFromValorantApi();
+  }
+
   @Post()
   create(@Body() createAgenteDto: CreateAgenteDto) {
     return this.agenteService.create(createAgenteDto);

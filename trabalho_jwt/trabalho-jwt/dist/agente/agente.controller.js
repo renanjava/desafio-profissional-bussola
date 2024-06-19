@@ -21,6 +21,9 @@ let AgenteController = class AgenteController {
     constructor(agenteService) {
         this.agenteService = agenteService;
     }
+    createFromValorantApi() {
+        return this.agenteService.createFromValorantApi();
+    }
     create(createAgenteDto) {
         return this.agenteService.create(createAgenteDto);
     }
@@ -38,6 +41,12 @@ let AgenteController = class AgenteController {
     }
 };
 exports.AgenteController = AgenteController;
+__decorate([
+    (0, common_1.Post)('/consumir-api'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], AgenteController.prototype, "createFromValorantApi", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),

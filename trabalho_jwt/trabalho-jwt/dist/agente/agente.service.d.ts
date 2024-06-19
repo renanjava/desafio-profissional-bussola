@@ -30,6 +30,7 @@ import { Agente } from './agente';
 export declare class AgenteService {
     private readonly agenteModel;
     constructor(agenteModel: Model<Agente>);
+    createFromValorantApi(): Promise<void>;
     create(createAgenteDto: CreateAgenteDto): Promise<import("mongoose").Document<unknown, {}, Agente> & Agente & {
         _id: import("mongoose").Types.ObjectId;
     }>;

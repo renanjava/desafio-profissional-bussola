@@ -20,6 +20,24 @@ let AgenteService = class AgenteService {
     constructor(agenteModel) {
         this.agenteModel = agenteModel;
     }
+    async createFromValorantApi() {
+        const fetchData = await fetch("https://valorant-api.com/v1/agents");
+        const jsonData = await fetchData.json();
+        console.log(jsonData);
+        jsonData.data.forEach(element => {
+            if (!((typeof element.displayName == "undefined") && (typeof element.description == "undefined") && (typeof element.displayIcon == "undefined") && (typeof element.role == "undefined"))) {
+                let createAgent;
+                createAgent.name = element.displayName;
+                createAgent.description = element.description;
+                createAgent.icon = element.displayIcon;
+                createAgent.role = element.role;
+                if (createAgent.name && createAgent.description && createAgent.icon && createAgent.role) {
+                    let createdAgent = new this.agenteModel(createAgent);
+                    createdAgent.save();
+                }
+            }
+        });
+    }
     async create(createAgenteDto) {
         const createdProduct = new this.agenteModel(createAgenteDto);
         return await createdProduct.save();
