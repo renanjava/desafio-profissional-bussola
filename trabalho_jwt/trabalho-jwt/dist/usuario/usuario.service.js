@@ -6,19 +6,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppModule = void 0;
+exports.UsuarioService = void 0;
 const common_1 = require("@nestjs/common");
-const agente_module_1 = require("./agente/agente.module");
-const mongoose_1 = require("@nestjs/mongoose");
-const usuario_module_1 = require("./usuario/usuario.module");
-let AppModule = class AppModule {
+let UsuarioService = class UsuarioService {
+    create(createUsuarioDto) {
+        return 'This action adds a new usuario';
+    }
+    findAll() {
+        return `This action returns all usuario`;
+    }
+    findOne(id) {
+        return `This action returns a #${id} usuario`;
+    }
+    update(id, updateUsuarioDto) {
+        return `This action updates a #${id} usuario`;
+    }
+    remove(id) {
+        return `This action removes a #${id} usuario`;
+    }
 };
-exports.AppModule = AppModule;
-exports.AppModule = AppModule = __decorate([
-    (0, common_1.Module)({
-        imports: [mongoose_1.MongooseModule.forRoot("mongodb://127.0.0.1:27017/nestjs"), agente_module_1.AgenteModule, usuario_module_1.UsuarioModule],
-        controllers: [],
-        providers: [],
-    })
-], AppModule);
-//# sourceMappingURL=app.module.js.map
+exports.UsuarioService = UsuarioService;
+exports.UsuarioService = UsuarioService = __decorate([
+    (0, common_1.Injectable)()
+], UsuarioService);
+//# sourceMappingURL=usuario.service.js.map
