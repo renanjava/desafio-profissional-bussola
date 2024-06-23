@@ -23,10 +23,10 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
-import { CreateAgenteDto } from './dto/create-agente.dto';
-import { UpdateAgenteDto } from './dto/update-agente.dto';
 import { Model } from 'mongoose';
 import { Agente } from './agente';
+import { CreateAgenteDto } from './dto/create-agente.dto';
+import { UpdateAgenteDto } from './dto/update-agente.dto';
 export declare class AgenteService {
     private readonly agenteModel;
     constructor(agenteModel: Model<Agente>);

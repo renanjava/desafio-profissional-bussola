@@ -21,20 +21,42 @@ let AgenteService = class AgenteService {
         this.agenteModel = agenteModel;
     }
     async createFromValorantApi() {
-        const fetchData = await fetch("https://valorant-api.com/v1/agents");
+        const fetchData = await fetch('https://valorant-api.com/v1/agents');
         const jsonData = await fetchData.json();
         console.log(jsonData);
-        jsonData.data.forEach(element => {
-            if (!((typeof element.displayName == "undefined") && (typeof element.description == "undefined") && (typeof element.displayIcon == "undefined") && (typeof element.role == "undefined"))) {
-                let createAgent;
-                createAgent.name = element.displayName;
-                createAgent.description = element.description;
-                createAgent.icon = element.displayIcon;
-                createAgent.role = element.role;
-                if (createAgent.name && createAgent.description && createAgent.icon && createAgent.role) {
-                    let createdAgent = new this.agenteModel(createAgent);
-                    createdAgent.save();
+        if (!jsonData || !jsonData.data) {
+            console.error('Invalid data received from API');
+            return;
+        }
+        jsonData.data.forEach(async (element) => {
+            if (element &&
+                element.displayName &&
+                element.description &&
+                element.displayIcon &&
+                element.role &&
+                element.role.displayName) {
+                const createAgent = {
+                    uuid: element.uuid,
+                    name: element.displayName,
+                    description: element.description,
+                    icon: element.displayIcon,
+                    role: element.role.displayName,
+                };
+                try {
+                    const createdAgent = new this.agenteModel(createAgent);
+                    await createdAgent.save();
                 }
+                catch (error) {
+                    if (error.code === 11000) {
+                        console.error(`Agent with uuid ${element.uuid} already exists`);
+                    }
+                    else {
+                        console.error('Error creating agent:', error);
+                    }
+                }
+            }
+            else {
+                console.warn('Incomplete data for element:', element);
             }
         });
     }
@@ -53,7 +75,7 @@ let AgenteService = class AgenteService {
         return this.findOne(id);
     }
     async remove(id) {
-        return await this.agenteModel.deleteOne({ _id: id, }).exec();
+        return await this.agenteModel.deleteOne({ _id: id }).exec();
     }
 };
 exports.AgenteService = AgenteService;

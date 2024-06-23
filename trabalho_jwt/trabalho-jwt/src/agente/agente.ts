@@ -1,4 +1,5 @@
 export class Agente {
+    uuid: String;
     name: String;
     description: String;
     icon: String;

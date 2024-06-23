@@ -1,36 +1,53 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAgenteDto } from './dto/create-agente.dto';
-import { UpdateAgenteDto } from './dto/update-agente.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Agente } from './agente';
-import { Console } from 'console';
-import { json } from 'stream/consumers';
+import { CreateAgenteDto } from './dto/create-agente.dto';
+import { UpdateAgenteDto } from './dto/update-agente.dto';
 
 @Injectable()
 export class AgenteService {
+  constructor(@InjectModel('Agente') private readonly agenteModel: Model<Agente>) {}
 
-  constructor(@InjectModel('Agente') private readonly agenteModel: Model<Agente>){}
-
-  async createFromValorantApi(){
-    const fetchData = await fetch("https://valorant-api.com/v1/agents");
+  async createFromValorantApi() {
+    const fetchData = await fetch('https://valorant-api.com/v1/agents');
     const jsonData = await fetchData.json();
     console.log(jsonData);
-    
 
-    jsonData.data.forEach(element => {
-      if(!((typeof element.displayName == "undefined") && (typeof element.description == "undefined") && (typeof element.displayIcon == "undefined") && (typeof element.role == "undefined"))){
-        let createAgent: Agente;
+    if (!jsonData || !jsonData.data) {
+      console.error('Dados inválidos');
+      return;
+    }
 
-        createAgent.name = element.displayName
-        createAgent.description = element.description
-        createAgent.icon = element.displayIcon
-        createAgent.role = element.role
+    jsonData.data.forEach(async (element) => {
+      if (
+        element &&
+        element.displayName &&
+        element.description &&
+        element.displayIcon &&
+        element.role &&
+        element.role.displayName
+      ) {
+        const createAgent: Partial<Agente> = {
+          uuid: element.uuid,
+          name: element.displayName,
+          description: element.description,
+          icon: element.displayIcon,
+          role: element.role.displayName,
+        };
 
-        if(createAgent.name && createAgent.description && createAgent.icon && createAgent.role){
-          let createdAgent = new this.agenteModel(createAgent);
-          createdAgent.save()
+        try {
+          const createdAgent = new this.agenteModel(createAgent);
+          await createdAgent.save();
+        } catch (error) {
+          if (error.code === 11000) {
+            console.error(`Agente com a uuid ${element.uuid} já existe no banco de dados`);
+          } else {
+            console.error('Error ao criar agente:', error);
+          }
         }
+      } else {
+        console.warn('Dados incompletos para o elemento:', element);
       }
     });
   }
@@ -49,11 +66,11 @@ export class AgenteService {
   }
 
   async update(id: string, updateAgenteDto: UpdateAgenteDto) {
-    await this.agenteModel.updateOne({_id: id}, updateAgenteDto).exec();
+    await this.agenteModel.updateOne({ _id: id }, updateAgenteDto).exec();
     return this.findOne(id);
   }
 
   async remove(id: string) {
-    return await this.agenteModel.deleteOne({_id: id,}).exec()
+    return await this.agenteModel.deleteOne({ _id: id }).exec();
   }
 }
