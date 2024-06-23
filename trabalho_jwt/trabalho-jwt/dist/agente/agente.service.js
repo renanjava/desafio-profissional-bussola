@@ -25,7 +25,7 @@ let AgenteService = class AgenteService {
         const jsonData = await fetchData.json();
         console.log(jsonData);
         if (!jsonData || !jsonData.data) {
-            console.error('Invalid data received from API');
+            console.error('Dados inválidos');
             return;
         }
         jsonData.data.forEach(async (element) => {
@@ -48,15 +48,15 @@ let AgenteService = class AgenteService {
                 }
                 catch (error) {
                     if (error.code === 11000) {
-                        console.error(`Agent with uuid ${element.uuid} already exists`);
+                        console.error(`Agente com a uuid ${element.uuid} já existe no banco de dados`);
                     }
                     else {
-                        console.error('Error creating agent:', error);
+                        console.error('Error ao criar agente:', error);
                     }
                 }
             }
             else {
-                console.warn('Incomplete data for element:', element);
+                console.warn('Dados incompletos para o elemento:', element);
             }
         });
     }

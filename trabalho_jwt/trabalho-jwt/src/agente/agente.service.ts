@@ -70,7 +70,7 @@ export class AgenteService {
     return this.findOne(id);
   }
 
-  async remove(id: string) {
+  async remove(id: string): Promise<any> {
     return await this.agenteModel.deleteOne({ _id: id }).exec();
   }
 }

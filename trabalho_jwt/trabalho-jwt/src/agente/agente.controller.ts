@@ -33,7 +33,7 @@ export class AgenteController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: string): Promise<any> {
     return this.agenteService.remove(id);
   }
 }
