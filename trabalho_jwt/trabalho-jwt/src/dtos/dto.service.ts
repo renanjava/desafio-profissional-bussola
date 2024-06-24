@@ -4,7 +4,7 @@ import { ExampleDto } from '../dtos/dto';
 @Injectable()
 export class AppService {
   getExample1(): string {
-    return getExample1;
+    return this.getExample1();
   }
 
   postExample2(data: ExampleDto): string {
