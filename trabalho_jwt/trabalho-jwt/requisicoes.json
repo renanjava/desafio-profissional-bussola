@@ -1,0 +1,128 @@
+[
+    {
+      "path": "/usuario",
+      "method": "POST",
+      "description": "Cria um novo usuário",
+      "body": {
+        "id": "string",
+        "username": "string",
+        "password": "string"
+      }
+    },
+    {
+      "path": "/usuario",
+      "method": "GET",
+      "description": "Busca todos os usuários",
+      "queryParams": []
+    },
+    {
+      "path": "/usuario/:id",
+      "method": "GET",
+      "description": "Busca um usuário específico pelo ID",
+      "params": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "/usuario/:id",
+      "method": "PATCH",
+      "description": "Atualiza um usuário pelo ID",
+      "params": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ],
+      "body": {
+        "id": "string",
+        "username": "string",
+        "password": "string"
+      }
+    },
+    {
+      "path": "/usuario/:id",
+      "method": "DELETE",
+      "description": "Remove um usuário pelo ID",
+      "params": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "/agente/consumir-api",
+      "method": "POST",
+      "description": "Cria um agente consumindo uma API externa (Valorant)",
+      "body": {}
+    },
+    {
+      "path": "/agente",
+      "method": "POST",
+      "description": "Cria um novo agente",
+      "body": {
+        "name": "string",
+        "description": "string",
+        "icon": "string",
+        "role": "string"
+      }
+    },
+    {
+      "path": "/agente",
+      "method": "GET",
+      "description": "Busca todos os agentes",
+      "queryParams": []
+    },
+    {
+      "path": "/agente/:id",
+      "method": "GET",
+      "description": "Busca um agente específico pelo ID",
+      "params": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "/agente/:id",
+      "method": "PATCH",
+      "description": "Atualiza um agente pelo ID",
+      "params": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ],
+      "body": {
+        "name": "string",
+        "description": "string",
+        "icon": "string",
+        "role": "string"
+      }
+    },
+    {
+      "path": "/agente/:id",
+      "method": "DELETE",
+      "description": "Remove um agente pelo ID",
+      "params": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "path": "/auth/login",
+      "method": "POST",
+      "description": "Realiza o login do usuário",
+      "body": {
+        "username": "string",
+        "password": "string"
+      }
+    }
+  ]
+  
