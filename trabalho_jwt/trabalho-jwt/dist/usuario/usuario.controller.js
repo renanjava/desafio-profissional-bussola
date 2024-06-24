@@ -36,10 +36,6 @@ let UsuarioController = class UsuarioController {
     remove(id) {
         return this.usuarioService.remove(id);
     }
-    async login({ username, password }) {
-        const token = await this.usuarioService.login(username, password);
-        return { token };
-    }
 };
 exports.UsuarioController = UsuarioController;
 __decorate([
@@ -77,13 +73,6 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], UsuarioController.prototype, "remove", null);
-__decorate([
-    (0, common_1.Post)('login'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], UsuarioController.prototype, "login", null);
 exports.UsuarioController = UsuarioController = __decorate([
     (0, common_1.Controller)('usuario'),
     __metadata("design:paramtypes", [usuario_service_1.UsuarioService])

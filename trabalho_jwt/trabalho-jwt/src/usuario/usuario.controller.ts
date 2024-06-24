@@ -32,10 +32,4 @@ export class UsuarioController {
   remove(@Param('id') id: string): Promise<Usuario> {
     return this.usuarioService.remove(id);
   }
-
-  @Post('login')
-  async login(@Body() { username, password }: { username: string; password: string }): Promise<{ token: string }> {
-    const token = await this.usuarioService.login(username, password);
-    return { token };
-  }
 }

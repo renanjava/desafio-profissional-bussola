@@ -10,10 +10,4 @@ export declare class UsuarioController {
     findOne(id: string): Promise<Usuario>;
     update(id: string, updateUsuarioDto: UpdateUsuarioDto): Promise<Usuario>;
     remove(id: string): Promise<Usuario>;
-    login({ username, password }: {
-        username: string;
-        password: string;
-    }): Promise<{
-        token: string;
-    }>;
 }

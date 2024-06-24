@@ -20,6 +20,7 @@ exports.UsuarioModule = UsuarioModule = __decorate([
         imports: [mongoose_1.MongooseModule.forFeature([{ name: 'Usuario', schema: usuario_entity_1.UsuarioSchema }])],
         controllers: [usuario_controller_1.UsuarioController],
         providers: [usuario_service_1.UsuarioService],
+        exports: [usuario_service_1.UsuarioService]
     })
 ], UsuarioModule);
 //# sourceMappingURL=usuario.module.js.map
